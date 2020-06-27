@@ -1,0 +1,74 @@
+{% extends 'common.html' %}
+
+{% block title %}
+Zagłosuj na radiowe przeboje wszechczasów!
+{% endblock %}
+
+{% block lead_content %}
+<div class="jumbotron">
+    <h1 class="display-4">Uwaga, konkurs!</h1>
+    <p class="lead">Poniżej znajduje się lista 30 najpopularniejszych utworów naszej stacji z której musimy wytypować top 3. Teraz głos należy do Ciebie!</p>
+    <hr class="my-4">
+    <p>Aby zagłosować na utwór wystarczy, że klikniesz na przycisk i zatwierdzisz swój wybór. (Można głosować tylko raz na dany utwór)</p>
+    <p>Dodatkowo, jeśli chcesz wziąć udział w konkursie, wypełnij proszę specjalny formularz i wyślij go do nas!</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="#" role="button" target="_blank" rel="noopener">Szczegóły o konkursie</a>
+    </p>
+</div>
+{% endblock %}
+
+{% block content %}
+
+{# Tutaj będzie formularz z możliwością wzięcia udziału w konkursie, widoczny po włączeniu opcji w JQuery #}
+
+
+{# Tutaj będzie dynamiczne listowanie utworów! #}
+<div class="row">
+    <div class="col-6 mb-4">
+        <div class="card flex-row flex-wrap">
+            <div class="card-header border-0">
+                <img src="https://via.placeholder.com/100.png" alt="Album image">
+            </div>
+            <div class="card-block px-2">
+                <h5 class="">Title</h5>
+                <p class="card-text">Album, Author</p>
+            </div>
+            <div class="w-100"></div>
+            <div class="card-footer w-100 text-muted">
+                <a href="#" class="btn btn-primary btn-sm btn-block">Zagłosuj</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 mb-4">
+        <div class="card flex-row flex-wrap">
+            <div class="card-header border-0">
+                <img src="https://via.placeholder.com/100.png" alt="Album image">
+            </div>
+            <div class="card-block px-2">
+                <h5 class="">Title</h5>
+                <p class="card-text">Album, Author</p>
+            </div>
+            <div class="w-100"></div>
+            <div class="card-footer w-100 text-muted">
+                <a href="#" class="btn btn-primary btn-sm btn-block">Zagłosuj</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 mb-4">
+        <div class="card flex-row flex-wrap">
+            <div class="card-header border-0">
+                <img src="https://via.placeholder.com/100.png" alt="Album image">
+            </div>
+            <div class="card-block px-2">
+                <h5 class="">Title</h5>
+                <p class="card-text">Album, Author</p>
+            </div>
+            <div class="w-100"></div>
+            <div class="card-footer w-100 text-muted">
+                <a href="#" class="btn btn-primary btn-sm btn-block">Zagłosuj</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
