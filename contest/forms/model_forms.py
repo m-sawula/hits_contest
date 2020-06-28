@@ -12,7 +12,9 @@ class AlbumForm(forms.ModelForm):
 class SongForm(forms.ModelForm):
     class Meta:
         model = Song
-        fields = ['song_name', 'year', 'album', 'yt_link', 'sort_order']
+        # usuwamy album bo jest pobierany w widoku oraz sotr order bo to będzie wypełniane automatycznie
+        # fields = ['song_name', 'year', 'album', 'yt_link', 'sort_order']
+        fields = ['song_name', 'year', 'yt_link']
 
 
 class SongVotesForm(forms.ModelForm):

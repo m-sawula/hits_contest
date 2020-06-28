@@ -1,7 +1,6 @@
 from django import forms
 
 
-# 13:10 sobota
 class AuthorForm(forms.Form):
     first_name = forms.CharField(label="First name", required=False)
     last_name = forms.CharField(label="Last name", required=False)
@@ -16,3 +15,8 @@ class AuthorForm(forms.Form):
         required=False,
         widget=forms.SelectDateWidget
     )
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label="Login", max_length=100)
+    password = forms.CharField(label="Password", widget=forms.PasswordInput)

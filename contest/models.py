@@ -21,7 +21,7 @@ class Author(models.Model):
 class Album(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="author")
     album_name = models.CharField(max_length=100)
-
+    # 11:14 dodanie autora
     def __str__(self):
         return self.album_name
 
@@ -32,7 +32,7 @@ class Song(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name="album")
     yt_link = models.CharField(max_length=255, null=True)
     sort_order = models.IntegerField(default=0)
-
+    # w lidacja roku i linka 11:05 z modelForms dziala tylko walidator prze clean
     def __str__(self):
         return "{} ({})".format(self.song_name, self.album.album_name)
 

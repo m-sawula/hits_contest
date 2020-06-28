@@ -21,27 +21,36 @@ from contest.views.standard_views import (
     AuthorIndexView,
     AuthorUpdateView,
     AuthorDeleteView,
-    AuthorCreateView
+    AuthorCreateView,
+    SongIndexView,
+    SongCreateView,
+    SongEditView,
+    SongDeleteView,
+    LoginView,
+    logout_view
 )
 
 from contest.views.generic_views import (
     AlbumIndexView,
-    AlbumCreateView, AlbumUpdateView, AlbumDeleteView
+    AlbumCreateView,
+    AlbumUpdateView,
+    AlbumDeleteView
 )
 
 album_patterns = ([
-    path('', AlbumIndexView.as_view(), name="index"),
-    path('create/', AlbumCreateView.as_view(), name="create"),
-    # od wersji 3 Django wymaga w generykach pk lub slaga
+    path('', AlbumIndexView.as_view(), name='index'),
+    path('create/', AlbumCreateView.as_view(), name='create'),
     path('<int:pk>/edit/', AlbumUpdateView.as_view(), name="edit"),
     path('<int:pk>/delete/', AlbumDeleteView.as_view(), name="delete"),
+    path('<int:album_id>/songs/', SongIndexView.as_view(), name='songs-index'),
+    path('<int:album_id>/songs/create', SongCreateView.as_view(), name='songs-create'),
+    path('<int:album_id>/songs/<int:song_id>/edit', SongEditView.as_view(), name='songs-edit'),
+    path('<int:album_id>/songs/<int:song_id>/delete', SongDeleteView.as_view(), name='songs-delete'),
 ], 'albums')
-
 
 author_patterns = ([
     path('', AuthorIndexView.as_view(), name='index'),
     path('create/', AuthorCreateView.as_view(), name='create'),
-    # robione normalnymi formulażani może być więc id
     path('<int:id>/edit/', AuthorUpdateView.as_view(), name='update'),
     path('<int:id>/delete/', AuthorDeleteView.as_view(), name='delete'),
 ], 'authors')
@@ -56,4 +65,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', CommonIndexView.as_view(), name='common-index'),
     path('panel/', include(panel_patterns)),
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', logout_view, name='logout')
 ]
