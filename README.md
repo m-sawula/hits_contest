@@ -1,5 +1,6 @@
-# Project Name
-> Here goes your awesome project description!
+# Hits Contest
+> The description of the application is being developed !!!
+> Indicates the musical hit of all time by voting.
 
 ## Table of contents
 * [General info](#general-info)
@@ -12,15 +13,19 @@
 * [Contact](#contact)
 
 ## General info
-Add more general information about project. What the purpose of the project is? Motivation?
+A project written in a group as a summary of the Advanced Django module of the Back-end developer course. The purpose of the application is to select a musical hit of all time by voting. The application has an administration panel that allows you to manage bands, albums and songs.
 
 ## Screenshots
 ![Example screenshot](./img/screenshot.png)
 
 ## Technologies
-* Tech 1 - version 1.0
-* Tech 2 - version 2.0
-* Tech 3 - version 3.0
+* asgiref==3.2.10
+* Django==3.0.7
+* django-crispy-forms==1.9.1
+* pkg-resources==0.0.0
+* psycopg2-binary==2.8.5
+* pytz==2020.1
+* sqlparse==0.3.1
 
 ## Setup
 Describe how to install / setup your local environement / add link to demo version.
