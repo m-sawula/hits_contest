@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%e3h1(b@x2a1yuwjcbiic$k9_1cn0@!m3w113ihq0w652-@4bs'
+# SECRET_KEY przeniesiony do laocal_settings
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,15 +77,15 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'HOST': '127.0.0.1',
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'hits_contest',
-        'USER': 'postgres',
-        'PASSWORD': 'coderslab',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'HOST': '127.0.0.1',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': przeniesione do laocal_settings
+#         'USER': przeniesione do laocal_settings
+#         'PASSWORD': przeniesione do laocal_settings
+#     }
+# }
 
 
 # Password validation
@@ -130,6 +130,14 @@ STATICFILES_DIRS = [
 
 STATIC_URL = '/static/'
 
+# dostosowuje formularze do danej biblioteki bootstrapa
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_URL = '/login'
+
+try:
+    from core.local_settings import *
+except ModuleNotFoundError:
+    print("Brak konfiguracji bazy danych w pliku local_settings.py!")
+    print("Uzupełnij dane i spróbuj ponownie!")
+    exit(0)

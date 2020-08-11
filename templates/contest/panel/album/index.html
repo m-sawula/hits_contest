@@ -4,11 +4,12 @@
 ​
 {% block content %}
     <div class="jumbotron py-2 px-4">
-        <h1 class="display-4">Spis albumów</h1>
+        <h1 class="display-4">Lista albumów</h1>
         <p class="lead">Poniżej znajduje się lista albumów dostępnych w aplikacji konkursowej.</p>
         <hr class="my-4">
         <p>
             <span class="d-block mb-2">Aby dodać nowy album kliknij w przycisk poniżej:</span>
+{#  sprawdza uprawnienia "perm" i wzależności od uprawnień aktywuje lub dzezaktywuje przycisk   #}
             {% if perms.contest.add_album %}
                 <a class="btn btn-success" href="{% url 'panel:albums:create' %}" role="button">Dodaj album</a>
             {% else %}
@@ -27,8 +28,8 @@
             </colgroup>
             <thead class="thead-dark">
             <tr>
-                <th>Nazwa</th>
-                <th>Autor</th>
+                <th>Nazwa albumu</th>
+                <th>Nazwa zespołu</th>
                 <th>Akcje</th>
             </tr>
             </thead>

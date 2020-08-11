@@ -4,12 +4,12 @@
 ​
 {% block content %}
     <div class="jumbotron py-2 px-4">
-        <h1 class="display-4">Spis albumów</h1>
+        <h1 class="display-4">Lista piosenek z albumu</h1>
         <p class="lead">Poniżej znajduje się lista piosenek z albumu "{{ album.album_name }}" dostępnych w aplikacji konkursowej.</p>
         <hr class="my-4">
         <p>
             <span class="d-block mb-2">Aby dodać nową piosenkę do albumu kliknij w przycisk poniżej:</span>
-            <a class="btn btn-success" href="{% url 'panel:albums:create' album_id=album.id %}" role="button">Dodaj piosenki do albumu</a>
+            <a class="btn btn-success" href="{% url 'panel:albums:songs-create' album_id=album.id %}" role="button">Dodaj piosenkę do albumu</a>
         </p>
     </div>
     <div class="table-responsive">

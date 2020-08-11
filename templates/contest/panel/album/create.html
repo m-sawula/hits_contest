@@ -1,4 +1,7 @@
 {% extends 'panel.html' %}
+
+{#formatuje formularze do szerokości strony, trzeba go dodać w setin.py CRISPY_TEMPLATE_PACK = 'bootstrap4'#}
+{% load crispy_forms_tags %}
 ​
 {% block title %}Dodaj album{% endblock %}
 ​
@@ -11,7 +14,7 @@
     <div>
         <form method="post" action="{% url 'panel:albums:create' %}" class="form">
             {% csrf_token %}
-            {{ form }}
+            {{ form|crispy }}
             <button type="submit" class="btn btn-success">Zapisz dane</button>
         </form>
     </div>

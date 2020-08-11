@@ -1,5 +1,21 @@
 {% extends 'panel.html' %}
-​
+​​{% load crispy_forms_tags %}
+{% load static %}
+
+{% block extra_stylesheets %}
+<link rel="stylesheet" href="{% static 'css/datepicker.min.css' %}">
+{% endblock %}
+
+{% block extra_javascript %}
+<script src="{% static 'js/datepicker.min.js' %}"></script>
+<script>
+    $('#id_birth_date,#id_debut').datepicker({
+        format:'dd/mm/yyyy',
+        autoHide: true
+    });
+</script>
+{% endblock %}
+
 {% block title %}Edycja autora: {{ author.first_name }} {{ author.last_name }}{% endblock %}
 ​
 {% block content %}
@@ -11,7 +27,7 @@
     <div>
         <form method="post" action="{% url 'panel:authors:update' id=author.id %}" class="form">
             {% csrf_token %}
-            {{ form }}
+            {{ form|crispy }}
             <button type="submit" class="btn btn-success">Edytuj dane Autora</button>
         </form>
     </div>

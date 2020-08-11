@@ -1,8 +1,8 @@
+
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from contest.models import Album
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-
 
 class AlbumIndexView(LoginRequiredMixin, ListView):
     model = Album
@@ -14,6 +14,7 @@ class AlbumCreateView(PermissionRequiredMixin, CreateView):
     model = Album
     fields = ['album_name', 'author']
     template_name = "contest/panel/album/create.html"
+    # przenosi pod wskazany adres url
     success_url = reverse_lazy('panel:albums:index')
 
 

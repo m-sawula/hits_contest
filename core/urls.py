@@ -24,10 +24,12 @@ from contest.views.standard_views import (
     AuthorCreateView,
     SongIndexView,
     SongCreateView,
-    SongEditView,
+    SongUpdateView,
     SongDeleteView,
     LoginView,
-    logout_view
+    logout_view,
+    VoteView,
+    ContestSubmissionView
 )
 
 from contest.views.generic_views import (
@@ -36,19 +38,27 @@ from contest.views.generic_views import (
     AlbumUpdateView,
     AlbumDeleteView
 )
-
+# te adresy URL są zrobione za pomocą
 album_patterns = ([
+    # http://127.0.0.1:8000/panel/albums/
     path('', AlbumIndexView.as_view(), name='index'),
     path('create/', AlbumCreateView.as_view(), name='create'),
     path('<int:pk>/edit/', AlbumUpdateView.as_view(), name="edit"),
     path('<int:pk>/delete/', AlbumDeleteView.as_view(), name="delete"),
+
+    # http://127.0.0.1:8000/panel/albums/album_id/songs/
     path('<int:album_id>/songs/', SongIndexView.as_view(), name='songs-index'),
+
     path('<int:album_id>/songs/create', SongCreateView.as_view(), name='songs-create'),
-    path('<int:album_id>/songs/<int:song_id>/edit', SongEditView.as_view(), name='songs-edit'),
+    # http://127.0.0.1:8000/panel/albums/album_id/songs/song_id/edit
+
+    path('<int:album_id>/songs/<int:song_id>/edit', SongUpdateView.as_view(), name='songs-edit'),
+
     path('<int:album_id>/songs/<int:song_id>/delete', SongDeleteView.as_view(), name='songs-delete'),
 ], 'albums')
 
 author_patterns = ([
+
     path('', AuthorIndexView.as_view(), name='index'),
     path('create/', AuthorCreateView.as_view(), name='create'),
     path('<int:id>/edit/', AuthorUpdateView.as_view(), name='update'),
@@ -56,15 +66,34 @@ author_patterns = ([
 ], 'authors')
 
 panel_patterns = ([
+    # główna strona dla ZALOGOWANYCH, url: http://127.0.0.1:8000/panel/
     path('', PanelIndexView.as_view(), name='index'),
-    path('authors/', include(author_patterns)),
-    path('albums/', include(album_patterns)),
+
+    # http://127.0.0.1:8000/panel/authors/
+    path('authors/', include(author_patterns)),  # zawiera ścieżki z author_patterns
+
+    #  http://127.0.0.1:8000/panel/albums/
+    path('albums/', include(album_patterns)),  # zawiera ścieżki z album_patterns
 ], 'panel')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # główna strona palikacji dla nie zalogowanych, url: http://127.0.0.1:8000
     path('', CommonIndexView.as_view(), name='common-index'),
-    path('panel/', include(panel_patterns)),
+
+    # główna strona dla ZALOGOWANYCH, url: http://127.0.0.1:8000/panel/
+    path('panel/', include(panel_patterns)),  # zawiera ścieżki z panel_patterns
+
+    #
     path('login/', LoginView.as_view(), name='login'),
-    path('logout/', logout_view, name='logout')
+
+    #
+    path('logout/', logout_view, name='logout'),
+
+    # głosowanie na piosenki, widok bez szablonu html
+    path('vote/', VoteView.as_view(), name='vote'),
+
+    # zliczanie głosów, widok bez szablonu html
+    path('submission/', ContestSubmissionView.as_view(), name='submission')
 ]

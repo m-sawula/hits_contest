@@ -1,18 +1,23 @@
 {% extends 'panel.html' %}
+
+{#formatuje formularze do szerokości strony, trzeba go dodać w settings.py#}
+{#CRISPY_TEMPLATE_PACK = 'bootstrap4'#}
+{% load crispy_forms_tags %}
 ​
 {% block title %}Edytuj albumy{% endblock %}
 {% block content %}
 <div class="jumbotron py-2 px-4">
     <h1 class="display-4">Edytuj album</h1>
     <hr class="my-4">
-    <a class="btn btn-info" href="{% url 'panel:albums:index' %}" role="button">Wróć do spisu</a>
+    <a class="btn btn-info" href="{% url 'panel:albums:index' %}" role="button">Wróć do listy albumów</a>
 </div>
 <div>
 {#generyki wymagają pk od wesjic 3 Django#}
+{#generyki wymagają pk od wesjic 3 Django#}
     <form method="POST" action="{% url 'panel:albums:edit' pk=object.id %}" class="form">
         {% csrf_token %}
-        {{ form }}
-    <button type="submit" class="btn btn-success">Zmodyfikuj dane</button>
+        {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Zapisz dane albumu</button>
     </form>
 </div>
 {% endblock %}

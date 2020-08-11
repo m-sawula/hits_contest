@@ -1,4 +1,6 @@
+from django.core.exceptions import ValidationError
 from django.db import models
+from datetime import datetime
 
 
 class Author(models.Model):
@@ -6,7 +8,7 @@ class Author(models.Model):
     last_name = models.CharField(max_length=64, null=True)
     birth_date = models.DateField(null=True)
     band_name = models.CharField(max_length=255)
-    debut = models.DateField(null=True)
+    debut = models.DateField(null=True, verbose_name="rok debiutu")
 
     @property
     def name(self):
@@ -17,22 +19,29 @@ class Author(models.Model):
     def __str__(self):
         return self.band_name
 
-
 class Album(models.Model):
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="author")
-    album_name = models.CharField(max_length=100)
-    # 11:14 dodanie autora
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name="Nazwa zespołu", related_name="author")
+    album_name = models.CharField(max_length=100, verbose_name="Nazwa albumu")
+    # poniżej ustawiamy jakie informacje będzie zwracać klasa
+    # ponieważ "author" ma klucz obcy do Author to "Album" może zwracać dane z klasy Author
     def __str__(self):
-        return self.album_name
+        return f"{self.album_name} ({self.author.band_name})"
 
 
 class Song(models.Model):
     song_name = models.CharField(max_length=64)
-    year = models.IntegerField()
+    year = models.IntegerField(verbose_name="Rok powstania piosenki")
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name="album")
-    yt_link = models.CharField(max_length=255, null=True)
+    yt_link = models.CharField(max_length=255, null=True, )
     sort_order = models.IntegerField(default=0)
-    # w lidacja roku i linka 11:05 z modelForms dziala tylko walidator prze clean
+
+    # walidator dla pola "year" i "yt_link"
+    def clean(self):
+        if int(self.year) < 1900 or int(self.year) > datetime.now().year:
+            raise ValidationError('Year is not valid, it should be between 1900 - curren year')
+        if self.yt_link != '#' and not self.yt_link.startswith('https://www.youtube.com'):
+            raise ValidationError('Wrong youtube link!')
+
     def __str__(self):
         return "{} ({})".format(self.song_name, self.album.album_name)
 

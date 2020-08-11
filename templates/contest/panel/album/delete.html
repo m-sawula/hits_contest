@@ -9,6 +9,7 @@
 </div>
 <div>
 {#generyki wymagają pk od wesjic 3 Django#}
+{#generyki wymagają pk od wesjic 3 Django#}
     <form method="POST" action="{% url 'panel:albums:delete' pk=object.id %}" class="form">
         {% csrf_token %}
         Czy na pewno chcesz usunąć {{ object }}?
