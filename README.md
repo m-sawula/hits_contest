@@ -19,8 +19,9 @@ A project written in a group as a summary of the Advanced Django module of the B
 
 ## Technologies
 * Python 3.6
-* asgiref 3.2.10
 * Django 3.0.7
+* Bootstrap v4.5.0
+* PostgreSQL
 * django-crispy-forms 1.9.1
 * psycopg2-binary 2.8.5
 
