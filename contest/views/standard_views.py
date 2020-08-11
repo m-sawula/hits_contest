@@ -75,7 +75,9 @@ class CommonIndexView(View):
             {
                 # do szablonu html przekazywane są posortowane piosenki
                 "songs": Song.objects.all().order_by('sort_order'),
+                # to jest ukryty formularz i jest odkrywany przez JQ po wybraniu przycisku "zagłosuj"
                 "vote_form": VoteForm(),
+                # to jest ukryty formularz i jest odkrywany przez JQ po wybraniu przycisku "Tak, chcę wygrać"
                 "contest_form": ContestSubmissionForm()
             }
         )
@@ -256,11 +258,14 @@ class SongIndexView(LoginRequiredMixin, View):
         # rozwiązanie najmniej obciążające aplikację
         # pobrać model i model nadrzędny w tym przypadku piosenkę i album
         album = Album.objects.get(id=album_id)
-        songs = Song.objects.filter(album_id=album_id)
+        songs = Song.objects.filter(album_id=album_id).order_by("-sort_order")
         return render(
             request,
             "contest/panel/song/index.html",
-            {"songs": songs, "album": album}
+            {
+                "songs": songs,
+                "album": album
+            }
         )
 
 
@@ -271,7 +276,10 @@ class SongCreateView(LoginRequiredMixin, View):
         return render(
             request,
             "contest/panel/song/create.html",
-            {"form": form, "album": album}
+            {
+                "form": form,
+                "album": album
+            }
         )
 
     # klasyczne zapisanie piosenki wyglądałoby tak:
@@ -302,7 +310,10 @@ class SongCreateView(LoginRequiredMixin, View):
         return render(
             request,
             "contest/panel/song/create.html",
-            {"form": form, "album": album}
+            {
+                "form": form,
+                "album": album
+            }
         )
 
 
