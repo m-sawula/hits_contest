@@ -7,8 +7,6 @@
 * [Technologies](#technologies)
 * [Features](#features)
 * [Status](#status)
-* [Inspiration](#inspiration)
-* [Contact](#contact)
 
 ## General info
 A project written in a group as a summary of the Advanced Django module of the Back-end developer course. The purpose of the application is to select a musical hit of all time by voting. The application has an administration panel that allows you to manage bands, albums and songs.
